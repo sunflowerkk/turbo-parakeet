@@ -46,13 +46,15 @@ while True:
     cv2.imshow('mask1', mask1)
     cv2.imwrite('picture.jpg', mask1)
     cv2.imshow('colorTest', frame)
+    
+    """轮廓检测"""
 
     img = cv2.imread('picture.jpg')
     img0 = cv2.imread('YellowStick.jpg')
     img1 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     ret, thresh = cv2.threshold(img1, 127, 255, 0)
     im2, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    for i in range(0, len(contours)):
+    for i in range(0, len(contours)): # 输出中点坐标
         x, y, w, h = cv2.boundingRect(contours[i])
         if a == 0:
             print((x, y, w, h))
